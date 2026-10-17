@@ -33,51 +33,64 @@
     </section>
 
     <section class="candle-section" aria-labelledby="candle-heading">
-      <h2 id="candle-heading">Now blow out your candle</h2>
-      <p class="instruction">Press the button and give your candle a real-life birthday blow!</p>
-      <div id="cake-stage" class="cake-stage">
-        <div class="cake" aria-label="A pink and vanilla birthday cake with one lit candle">
-          <div class="cake-top">
-            <span class="frosting frosting-one"></span>
-            <span class="frosting frosting-two"></span>
-            <span class="sprinkle sprinkle-one"></span>
-            <span class="sprinkle sprinkle-two"></span>
-            <span class="sprinkle sprinkle-three"></span>
-            <span class="sprinkle sprinkle-four"></span>
-            <span class="berry berry-one"></span>
-            <span class="berry berry-two"></span>
-            <span class="berry berry-three"></span>
-          </div>
-          <div class="cake-side">
-            <span class="filling"></span>
-            <span class="frosting-drip drip-one"></span>
-            <span class="frosting-drip drip-two"></span>
-            <span class="frosting-drip drip-three"></span>
-            <span class="frosting-drip drip-four"></span>
-          </div>
+      <h2 id="candle-heading">A birthday cake made just for you</h2>
+      <p id="cake-instruction" class="instruction">Light the candles, make a wish, and blow them out!</p>
+      <div class="cake-stage">
+        <div id="cake" class="cake" role="button" tabindex="0" aria-disabled="true" aria-label="Birthday cake. Light and blow out the candles before taking a slice.">
           <div class="cake-plate"></div>
-          <div id="candle" class="candle">
-            <span id="flame" class="flame" aria-label="Candle flame"></span>
-            <span class="wick"></span>
+          <div class="tier tier-bottom">
+            <div class="tier-side">
+              <span class="tier-filling"></span>
+              <span class="tier-drip drip-a"></span><span class="tier-drip drip-b"></span>
+              <span class="tier-drip drip-c"></span><span class="tier-drip drip-d"></span>
+              <span class="cake-decoration decoration-a">🌼</span><span class="cake-decoration decoration-b">🍓</span>
+              <span class="cake-decoration decoration-c">⭐</span><span class="cake-decoration decoration-d">🫐</span>
+            </div>
+            <div class="tier-cap">
+              <span class="berry berry-a"></span><span class="berry berry-b"></span><span class="berry berry-c"></span>
+            </div>
           </div>
-          <div id="cut-slice" class="cut-slice" aria-hidden="true"></div>
+          <div class="tier tier-middle">
+            <div class="tier-side">
+              <span class="tier-filling"></span>
+              <span class="tier-drip drip-a"></span><span class="tier-drip drip-b"></span>
+              <span class="tier-drip drip-c"></span><span class="tier-drip drip-d"></span>
+              <span class="cake-decoration decoration-a">🌸</span><span class="cake-decoration decoration-b">🍓</span>
+              <span class="cake-decoration decoration-c">🫐</span>
+            </div>
+            <div class="tier-cap">
+              <span class="berry berry-a"></span><span class="berry berry-b"></span>
+            </div>
+          </div>
+          <div class="tier tier-top">
+            <div class="tier-side">
+              <span class="tier-filling"></span>
+              <span class="tier-drip drip-a"></span><span class="tier-drip drip-b"></span>
+              <span class="tier-drip drip-c"></span>
+              <span class="cake-decoration decoration-a">🌼</span><span class="cake-decoration decoration-b">🍒</span>
+            </div>
+            <div class="tier-cap">
+              <span class="berry berry-a"></span><span class="berry berry-b"></span>
+            </div>
+            <div class="candles" aria-label="Four birthday candles">
+              <span class="candle candle-a"><span class="flame"></span><span class="wick"></span></span>
+              <span class="candle candle-b"><span class="flame"></span><span class="wick"></span></span>
+              <span class="candle candle-c"><span class="flame"></span><span class="wick"></span></span>
+              <span class="candle candle-d"><span class="flame"></span><span class="wick"></span></span>
+            </div>
+          </div>
+          <span class="cake-gap" aria-hidden="true"></span>
         </div>
-        <svg id="cut-overlay" class="cut-overlay" aria-hidden="true" viewBox="0 0 1000 1000" preserveAspectRatio="none"></svg>
-        <span id="knife-cursor" class="knife-cursor" aria-hidden="true">🔪</span>
+        <div id="cake-slice" class="cake-slice" aria-hidden="true">
+          <span class="slice-strawberry">🍓</span>
+        </div>
       </div>
-      <p id="candle-status" class="status-message" role="status" aria-live="polite">Your candle is glowing. Make a wish!</p>
+      <p id="candle-status" class="status-message" role="status" aria-live="polite">Your candles are waiting to be lit. 🕯️</p>
       <div class="controls">
-        <button id="blow-button" class="primary-button" type="button">🎤 Blow out the candle</button>
-        <button id="manual-blow-button" class="text-button" type="button">Or tap here to blow it out instead</button>
+        <button id="light-button" class="primary-button" type="button">🕯️ Light the candles</button>
+        <button id="blow-button" class="primary-button" type="button" hidden>💨🎤 Blow out the candles</button>
+        <button id="manual-blow-button" class="text-button" type="button" hidden>💨 Tap here to blow them out instead</button>
       </div>
-    </section>
-
-    <section id="cut-section" class="cut-section" hidden aria-labelledby="cut-heading">
-      <h2 id="cut-heading">The candle is out! 🎉</h2>
-      <p id="cut-instruction" class="instruction">Grab the knife, then drag it across the cake to cut a slice.</p>
-      <button id="knife-button" class="primary-button knife-button" type="button" aria-pressed="false">🔪 Grab the knife</button>
-      <p id="cut-status" class="status-message" role="status" aria-live="polite"></p>
-      <button id="again-button" class="text-button" type="button" hidden>Cut another slice</button>
     </section>
   </main>
 

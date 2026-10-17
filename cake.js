@@ -2,27 +2,23 @@ const wishButton = document.getElementById("wish-button");
 const wishForm = document.getElementById("wish-form");
 const wishInput = document.getElementById("wish-input");
 const wishMessage = document.getElementById("wish-message");
-const flame = document.getElementById("flame");
+const cake = document.getElementById("cake");
+const cakeSlice = document.getElementById("cake-slice");
+const cakeInstruction = document.getElementById("cake-instruction");
+const lightButton = document.getElementById("light-button");
 const blowButton = document.getElementById("blow-button");
 const manualBlowButton = document.getElementById("manual-blow-button");
 const candleStatus = document.getElementById("candle-status");
-const cutSection = document.getElementById("cut-section");
-const knifeButton = document.getElementById("knife-button");
-const cutInstruction = document.getElementById("cut-instruction");
-const cutStatus = document.getElementById("cut-status");
-const againButton = document.getElementById("again-button");
-const cakeStage = document.getElementById("cake-stage");
-const cutOverlay = document.getElementById("cut-overlay");
-const knifeCursor = document.getElementById("knife-cursor");
+const flames = cake.querySelectorAll(".flame");
 
 let microphoneStream;
 let audioContext;
 let analyser;
 let microphoneFrame;
 let loudFrames = 0;
-let knifeEnabled = false;
-let cutStart;
-let candleOut = false;
+let candlesLit = false;
+let candlesOut = false;
+let sliceServed = false;
 
 wishButton.addEventListener("click", () => {
   const isOpening = wishForm.hidden;
@@ -58,17 +54,28 @@ function stopMicrophone() {
   }
 }
 
-function extinguishCandle(message) {
-  candleOut = true;
-  flame.classList.add("is-out");
-  flame.setAttribute("aria-label", "Candle flame is out");
+function lightCandles() {
+  candlesLit = true;
+  cake.classList.add("candles-lit");
+  cake.setAttribute("aria-label", "Four lit candles on a decorated birthday cake");
+  lightButton.hidden = true;
+  blowButton.hidden = false;
+  manualBlowButton.hidden = false;
+  candleStatus.textContent = "All four candles are glowing. Make a wish, then blow them out! ✨";
+}
+
+function extinguishCandles(message) {
+  candlesOut = true;
+  cake.classList.remove("candles-lit");
+  cake.classList.add("candles-out");
+  flames.forEach((flame) => flame.setAttribute("aria-label", "Candle flame is out"));
+  cake.setAttribute("aria-disabled", "false");
+  cake.setAttribute("aria-label", "Birthday cake with candles blown out. Tap to take a slice.");
+  cakeInstruction.textContent = "The candles are out! Tap or press Enter on the cake to take a slice.";
   candleStatus.textContent = message;
   blowButton.hidden = true;
   manualBlowButton.hidden = true;
   stopMicrophone();
-  cutSection.hidden = false;
-  cutInstruction.textContent = "Grab the knife, then drag it across the cake to cut a slice.";
-  cutSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function monitorMicrophone() {
@@ -88,7 +95,7 @@ function monitorMicrophone() {
   }
 
   if (loudFrames >= 4) {
-    extinguishCandle("What a lovely birthday blow! Your candle is out. 🎉");
+    extinguishCandles("What a lovely birthday blow! All four candles are out. 🎉");
     return;
   }
 
@@ -97,22 +104,23 @@ function monitorMicrophone() {
 
 function microphoneErrorMessage(error) {
   if (window.isSecureContext === false) {
-    return "Microphone access needs a secure page (HTTPS or localhost). Tap below to blow out the candle instead.";
+    return "Microphone access needs a secure page (HTTPS or localhost). Use the tap-to-blow button instead.";
   }
   if (error && error.name === "NotAllowedError") {
-    return "Microphone access was denied. You can still tap the button below to blow out the candle.";
+    return "Microphone access was denied. Use the tap-to-blow button instead.";
   }
   if (error && error.name === "NotFoundError") {
-    return "No microphone was found. You can still tap the button below to blow out the candle.";
+    return "No microphone was found. Use the tap-to-blow button instead.";
   }
-  return "The microphone couldn't start. You can still tap the button below to blow out the candle.";
+  return "The microphone couldn't start. Use the tap-to-blow button instead.";
 }
+
+lightButton.addEventListener("click", lightCandles);
 
 blowButton.addEventListener("click", async () => {
   const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !AudioContextConstructor) {
-    candleStatus.textContent = "Microphone blowing isn't supported here. Tap below to blow out the candle instead.";
-    manualBlowButton.hidden = false;
+    candleStatus.textContent = "Microphone blowing isn't supported here. Use the tap-to-blow button instead.";
     return;
   }
 
@@ -120,116 +128,58 @@ blowButton.addEventListener("click", async () => {
   candleStatus.textContent = "Allow microphone access, then blow toward your device. 🎤";
   try {
     microphoneStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    if (candleOut) {
+    if (candlesOut) {
       stopMicrophone();
       return;
     }
     audioContext = new AudioContextConstructor();
     await audioContext.resume();
-    if (candleOut) {
+    if (candlesOut) {
       stopMicrophone();
       return;
     }
     analyser = audioContext.createAnalyser();
     analyser.fftSize = 1024;
     audioContext.createMediaStreamSource(microphoneStream).connect(analyser);
-    blowButton.textContent = "Listening... blow now!";
+    blowButton.textContent = "Listening... 💨 Blow now!";
     blowButton.disabled = false;
-    candleStatus.textContent = "I'm listening! Blow toward your microphone to put out the candle.";
+    candleStatus.textContent = "I'm listening! Blow toward your microphone to put out all four candles.";
     microphoneFrame = requestAnimationFrame(monitorMicrophone);
   } catch (error) {
     stopMicrophone();
-    if (candleOut) return;
+    if (candlesOut) return;
     blowButton.disabled = false;
     candleStatus.textContent = microphoneErrorMessage(error);
-    manualBlowButton.hidden = false;
   }
 });
 
 manualBlowButton.addEventListener("click", () => {
-  extinguishCandle("Wish made! Your candle is out. 🎉");
+  extinguishCandles("Wish made! All four candles are out. 🎉");
 });
 
-knifeButton.addEventListener("click", () => {
-  knifeEnabled = !knifeEnabled;
-  knifeButton.setAttribute("aria-pressed", String(knifeEnabled));
-  document.body.classList.toggle("knife-active", knifeEnabled);
-
-  if (knifeEnabled) {
-    knifeButton.textContent = "Done cutting";
-    cutInstruction.textContent = "Drag the knife across the cake. You can make as many cuts as you like!";
-    cutStatus.textContent = "Knife ready — drag across the cake to make a cut.";
-  } else {
-    knifeButton.textContent = "🔪 Grab the knife";
-    cutStatus.textContent = "Knife put away.";
+function serveSlice() {
+  if (!candlesOut) {
+    candleStatus.textContent = "Light the candles and blow them out before taking a slice. 🕯️";
+    return;
   }
-});
+  if (sliceServed) {
+    candleStatus.textContent = "Enjoy your birthday cake! Your slice is ready. 🍰";
+    return;
+  }
 
-function cakePoint(event) {
-  const bounds = cakeStage.getBoundingClientRect();
-  return {
-    x: ((event.clientX - bounds.left) / bounds.width) * 100,
-    y: ((event.clientY - bounds.top) / bounds.height) * 100,
-    svgX: ((event.clientX - bounds.left) / bounds.width) * 1000,
-    svgY: ((event.clientY - bounds.top) / bounds.height) * 1000
-  };
+  sliceServed = true;
+  cake.classList.add("is-cut");
+  cakeSlice.classList.add("is-served");
+  cake.setAttribute("aria-label", "A slice has been taken from the birthday cake");
+  candleStatus.textContent = "A slice, just for you! Happy Birthday! 🍰";
 }
 
-function addCut(start, end) {
-  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  line.setAttribute("x1", String(start.svgX));
-  line.setAttribute("y1", String(start.svgY));
-  line.setAttribute("x2", String(end.svgX));
-  line.setAttribute("y2", String(end.svgY));
-  cutOverlay.append(line);
-  cakeStage.classList.add("is-cut");
-  againButton.hidden = false;
-  cutStatus.textContent = "You did it! A slice of birthday cake, made just for you. 🍰";
-  cutInstruction.textContent = "A sweet little slice, just for you! Drag again to cut another.";
-}
-
-cakeStage.addEventListener("pointerdown", (event) => {
-  const targetIsCake = event.target.closest(".cake");
-  if (!knifeEnabled || !targetIsCake) return;
-  event.preventDefault();
-  cutStart = cakePoint(event);
-  cakeStage.setPointerCapture(event.pointerId);
-});
-
-cakeStage.addEventListener("pointermove", (event) => {
-  if (!knifeEnabled) return;
-  knifeCursor.style.left = `${event.clientX}px`;
-  knifeCursor.style.top = `${event.clientY}px`;
-  knifeCursor.classList.add("is-visible");
-});
-
-cakeStage.addEventListener("pointerleave", () => {
-  if (!cutStart) knifeCursor.classList.remove("is-visible");
-});
-
-cakeStage.addEventListener("pointerup", (event) => {
-  if (!cutStart) return;
-  const end = cakePoint(event);
-  const distance = Math.hypot(end.x - cutStart.x, end.y - cutStart.y);
-  if (distance < 3) {
-    end.x = Math.min(95, Math.max(5, cutStart.x + 15));
-    end.svgX = (end.x / 100) * 1000;
+cake.addEventListener("click", serveSlice);
+cake.addEventListener("keydown", (event) => {
+  if ((event.key === "Enter" || event.key === " ") && !event.repeat) {
+    event.preventDefault();
+    serveSlice();
   }
-  addCut(cutStart, end);
-  cutStart = undefined;
-});
-
-cakeStage.addEventListener("pointercancel", () => {
-  cutStart = undefined;
-});
-
-againButton.addEventListener("click", () => {
-  knifeEnabled = true;
-  knifeButton.setAttribute("aria-pressed", "true");
-  knifeButton.textContent = "Done cutting";
-  document.body.classList.add("knife-active");
-  cutInstruction.textContent = "Drag the knife across the cake. You can make as many cuts as you like!";
-  cutStatus.textContent = "Knife ready — drag across the cake to make another cut.";
 });
 
 window.addEventListener("pagehide", stopMicrophone);
