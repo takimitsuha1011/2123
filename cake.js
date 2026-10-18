@@ -3,13 +3,13 @@ const wishForm = document.getElementById("wish-form");
 const wishInput = document.getElementById("wish-input");
 const wishMessage = document.getElementById("wish-message");
 const cake = document.getElementById("cake");
-const cakeSlice = document.getElementById("cake-slice");
+const cakeScene = document.getElementById("birthdaySceneSvg");
 const cakeInstruction = document.getElementById("cake-instruction");
 const lightButton = document.getElementById("light-button");
 const blowButton = document.getElementById("blow-button");
 const manualBlowButton = document.getElementById("manual-blow-button");
 const candleStatus = document.getElementById("candle-status");
-const flames = cake.querySelectorAll(".flame");
+const flames = cake.querySelectorAll(".flame-group");
 
 let microphoneStream;
 let audioContext;
@@ -56,6 +56,7 @@ function stopMicrophone() {
 
 function lightCandles() {
   candlesLit = true;
+  cake.classList.remove("candles-out");
   cake.classList.add("candles-lit");
   cake.setAttribute("aria-label", "Four lit candles on a decorated birthday cake");
   lightButton.hidden = true;
@@ -168,8 +169,12 @@ function serveSlice() {
   }
 
   sliceServed = true;
-  cake.classList.add("is-cut");
-  cakeSlice.classList.add("is-served");
+  cakeScene.classList.add("cutting-active");
+  window.setTimeout(() => {
+    document.getElementById("bottomTierClippedWrapper").setAttribute("clip-path", "url(#bottomTierCutoutClip)");
+    cakeScene.classList.remove("cutting-active");
+    cakeScene.classList.add("slice-served");
+  }, 180);
   cake.setAttribute("aria-label", "A slice has been taken from the birthday cake");
   candleStatus.textContent = "A slice, just for you! Happy Birthday! 🍰";
 }
