@@ -4,52 +4,52 @@ window.BIRTHDAY_MUSIC = {
   audioSrc: "media/Blue-Yung-Kai.m4a",
   coverSrc: "images/hheerr.jpg",
   lyrics: [
-  // Guitar Intro (0:00 - 0:19)
-  { time: 0, text: "(instrumental intro)" },
+    // Guitar Intro (0:00 - 0:18.7)
+    { time: 0.0, text: "(instrumental intro)" },
 
-  // Verse 1 (0:19 - 0:48)
-  { time: 19, text: "Your morning eyes" },
-  { time: 21, text: "I could stare like watching stars" },
-  { time: 26, text: "I could walk you by and" },
-  { time: 29, text: "I'll tell without a thought" },
-  { time: 33, text: "You'll be mine would you mind" },
-  { time: 36, text: "If I took your hand tonight" },
-  { time: 40, text: "Know you're all that I want is life" },
+    // Verse 1 (0:18.7 - 0:48.0)
+    { time: 18.7, text: "Your morning eyes" },
+    { time: 21.2, text: "I could stare like watching stars" },
+    { time: 26.2, text: "I could walk you by and" },
+    { time: 29.0, text: "I'll tell without a thought" },
+    { time: 32.4, text: "You'd be mine, would you mind" },
+    { time: 35.8, text: "If I took your hand tonight?" },
+    { time: 40.0, text: "Know you're all that I want this life" },
 
-  // Chorus 1 (0:48 - 1:15)
-  { time: 48, text: "I'll imagine we fell in love" },
-  { time: 51, text: "I'll nap under moonlight skies with you" },
-  { time: 54, text: "I think I'll picture" },
-  { time: 56, text: "us, you with the waves" },
-  { time: 59, text: "The oceans colors on your face" },
-  { time: 63, text: "I'll leave my heart with your air" },
-  { time: 66, text: "so let me fly with you" },
-  { time: 70, text: "will you be forever with me?" },
+    // Chorus 1 (0:48.0 - 1:14.9)
+    { time: 48.0, text: "I'll imagine we fell in love" },
+    { time: 50.6, text: "I'll nap under moonlight skies with you" },
+    { time: 54.2, text: "I think I'll picture" },
+    { time: 56.4, text: "us, you with the waves" },
+    { time: 58.8, text: "The ocean's colors on your face" },
+    { time: 62.5, text: "I'll leave my heart with your air" },
+    { time: 66.4, text: "So let me fly with you" },
+    { time: 69.6, text: "Will you be forever with me?" },
 
-  // Instrumental Solo (1:15 - 1:47)
-  { time: 75, text: "(instrumental)" },
+    // Instrumental Solo (1:14.9 - 1:46.8)
+    { time: 74.9, text: "(instrumental)" },
 
-  // Verse 2 (1:47 - 2:18)
-  { time: 107, text: "My love will always stay by you" },
-  { time: 111, text: "I'll keep it safe so" },
-  { time: 114, text: "don't you worry a think" },
-  { time: 118, text: "I'll tell you I love you more" },
-  { time: 121, text: "it's stuck with you forever" },
-  { time: 124, text: "so promise you won't let it go" },
-  { time: 129, text: "I'll Trust the universe" },
-  { time: 132, text: "will always bring me to" },
+    // Verse 2 (1:46.8 - 2:18.0)
+    { time: 106.8, text: "My love will always stay by you" },
+    { time: 112.6, text: "I'll keep it safe, so" },
+    { time: 115.0, text: "don't you worry a thing" },
+    { time: 118.0, text: "I'll tell you I love you more" },
+    { time: 121.2, text: "It's stuck with you forever" },
+    { time: 124.5, text: "So promise you won't let it go" },
+    { time: 128.8, text: "I'll trust the universe" },
+    { time: 132.0, text: "will always bring me to you" },
 
-  // Chorus 2 (2:18 - 2:46)
-  { time: 138, text: "I'll imagine we fell in love" },
-  { time: 141, text: "I'll nap under moonlight skies with you" },
-  { time: 145, text: "I think I'll picture" },
-  { time: 147, text: "us, you with the waves" },
-  { time: 149, text: "The oceans colors on your face" },
-  { time: 153, text: "I'll leave my heart with your air" },
-  { time: 157, text: "so let me fly with you" },
-  { time: 161, text: "will you be forever with me?" },
+    // Chorus 2 (2:18.0 - 2:45.0)
+    { time: 138.0, text: "I'll imagine we fell in love" },
+    { time: 140.6, text: "I'll nap under moonlight skies with you" },
+    { time: 144.2, text: "I think I'll picture" },
+    { time: 146.4, text: "us, you with the waves" },
+    { time: 148.8, text: "The ocean's colors on your face" },
+    { time: 152.5, text: "I'll leave my heart with your air" },
+    { time: 156.4, text: "So let me fly with you" },
+    { time: 159.6, text: "Will you be forever with me?" },
 
-  // Long Instrumental Outro (2:46 - 3:34)
-  { time: 166, text: "(long instrumental)" }
+    // Long Instrumental Outro (2:45.0+)
+    { time: 165.0, text: "(long instrumental)" }
   ]
 };
