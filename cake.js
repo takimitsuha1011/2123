@@ -187,4 +187,11 @@ cake.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("pagehide", stopMicrophone);
+function handlePageLeave() {
+  stopMicrophone();
+  window.removeEventListener("pagehide", handlePageLeave);
+  window.removeEventListener("birthday:pageleave", handlePageLeave);
+}
+
+window.addEventListener("pagehide", handlePageLeave, { once: true });
+window.addEventListener("birthday:pageleave", handlePageLeave, { once: true });

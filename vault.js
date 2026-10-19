@@ -65,6 +65,6 @@ document.getElementById("vault-modal-done").addEventListener("click", closeLette
 modal.addEventListener("click", (event) => {
   if (event.target === modal) closeLetter();
 });
-document.addEventListener("keydown", (event) => {
+modal.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !modal.classList.contains("hidden")) closeLetter();
 });

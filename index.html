@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="music-player.css" />
+  <script src="music-config.js" defer></script>
+  <script src="music-player.js" defer></script>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 paper-texture">
   <main class="relative w-full max-w-md rounded-3xl bg-[#FFFDF7] p-7 text-center sketch-border shadow-2xl sm:p-9">
@@ -37,7 +40,11 @@
     const nicknameFeedback = document.getElementById("nickname-gate-feedback");
 
     function continueToBirthdayPage() {
-      window.location.href = "birthday.html";
+      if (window.navigateTo) {
+        window.navigateTo("birthday.html");
+      } else {
+        window.location.href = "birthday.html";
+      }
     }
 
     nicknameGateForm.addEventListener("submit", (event) => {

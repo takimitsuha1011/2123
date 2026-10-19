@@ -2,7 +2,8 @@ const memories = [
   {
     caption: "First Date ☕",
     note: "I was so nervous before you walked in, and then we talked for hours until the cafe closed. Best coffee ever. ☕❤️",
-    art: "☕"
+    art: "☕",
+    image: "images/hheerr.jpg"
   },
   {
     caption: "Road Trip 🚗",
@@ -85,7 +86,15 @@ memories.forEach((memory, index) => {
   art.className = "memory-art";
   art.style.backgroundColor = palette[index % palette.length];
   art.setAttribute("aria-hidden", "true");
-  art.textContent = memory.art;
+  if (memory.image) {
+    const image = document.createElement("img");
+    image.className = "memory-photo";
+    image.src = memory.image;
+    image.alt = "";
+    art.append(image);
+  } else {
+    art.textContent = memory.art;
+  }
 
   const caption = document.createElement("span");
   caption.className = "memory-caption";
