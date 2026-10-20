@@ -174,7 +174,7 @@ function serveSlice() {
     document.getElementById("bottomTierClippedWrapper").setAttribute("clip-path", "url(#bottomTierCutoutClip)");
     cakeScene.classList.remove("cutting-active");
     cakeScene.classList.add("slice-served");
-  }, 180);
+  }, 420);
   cake.setAttribute("aria-label", "A slice has been taken from the birthday cake");
   candleStatus.textContent = "A slice, just for you! Happy Birthday! 🍰";
 }

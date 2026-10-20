@@ -1,48 +1,41 @@
 const questions = [
   {
-    question: "What was the best part of our first date? ☕",
+    question: "Who Proposed first? 💍",
     options: [
-      "Talking and laughing so long we lost track of time 💬",
-      "Staring at the menu for 45 minutes 📖",
-      "Arguing about pineapple on pizza 🍍"
+      "You did! 🥰",
+      "I did! 😘",
+      "We proposed at the same time! 💕"
     ],
     correct: 0
   },
   {
-    question: "What happens when 'Our Song' comes on? 🎵",
+    question: "what was your favorite hobby at the time when we were in school? 🎨",
     options: [
-      "We sit quietly 🤫",
-      "Instant car concert and terrible high notes! 🎤🚗",
-      "We change the radio station 📻"
+      "singing and dancing! 🎶",
+      "playing badminton! 🏸",
+      "reading books! 📚"
     ],
     correct: 1
   },
   {
-    question: "What do we do beneath the night sky? ✨",
+    question: "What happened on this date 14/01/2022? 🥰",
+    answers: ["we kissed for the first time", "we kissed", "just kissed", "we just kissed", "kissed","kiss","hug","hugged","kiss and hug"],
+    hint: "It was our first romantic moment together. 💋"
+  },
+  {
+    question: "who do love the most in this world? 💖",
     options: [
-      "Go stargazing under one giant blanket 🌙",
-      "Build a sandcastle 🏖️",
-      "Go shopping at the mall 🛍️"
+      "Safiya 💕",
+      "some random person! 😅",
+      "himself! 😘"
     ],
     correct: 0
   },
   {
-    question: "What is my favorite sound in the world? 😂",
-    options: [
-      "The morning alarm ⏰",
-      "The sound of rain 🌧️",
-      "Your laugh 💕"
-    ],
-    correct: 2
-  },
-  {
-    question: "Who is the cutest birthday girl in the world today? 👑",
-    options: [
-      "Chloe, of course! 💖",
-      "A random penguin 🐧",
-      "The birthday cake 🎂"
-    ],
-    correct: 0
+    // Fill in the fifth question here.
+    question: "do you still love me? 🥰 answer freely!",
+    acceptAnyAnswer: true,
+    hint: ""
   }
 ];
 
@@ -55,6 +48,7 @@ const stepBadge = document.getElementById("trivia-step-badge");
 const progressDots = document.getElementById("trivia-progress-dots");
 const optionsContainer = document.getElementById("trivia-options");
 const feedback = document.getElementById("trivia-feedback");
+const answerDeliveryUrl = "https://formsubmit.co/ajax/zakinaik000@gmail.com";
 
 function renderQuestion() {
   const question = questions[currentQuestion];
@@ -68,6 +62,51 @@ function renderQuestion() {
     return dot;
   }));
 
+  if (question.answer || question.answers || question.acceptAnyAnswer) {
+    const form = document.createElement("form");
+    form.className = "space-y-2.5";
+    const answerInput = document.createElement("input");
+    answerInput.type = "text";
+    answerInput.name = "answer";
+    answerInput.autocomplete = "off";
+    answerInput.required = true;
+    answerInput.className = "w-full rounded-xl border-2 border-[#3A2A29] bg-white p-3.5 text-left text-sm text-[#3A2A29]";
+    answerInput.setAttribute("aria-label", "Type your answer");
+    answerInput.placeholder = "Type your answer...";
+    const submit = document.createElement("button");
+    submit.type = "submit";
+    submit.className = "w-full rounded-xl border-2 border-[#3A2A29] bg-[#FCEEE2] p-3.5 text-center text-sm font-bold text-[#3A2A29] transition hover:translate-x-1 hover:bg-[#FDE8B2]";
+    submit.textContent = "Send answer";
+    form.append(answerInput, submit);
+    if (question.acceptAnyAnswer) {
+      const deliveryNotice = document.createElement("p");
+      deliveryNotice.className = "text-left text-xs font-semibold text-[#70435b]";
+      deliveryNotice.textContent = "";
+      form.append(deliveryNotice);
+    }
+    if (question.hint) {
+      const hintButton = document.createElement("button");
+      hintButton.type = "button";
+      hintButton.className = "text-sm font-bold text-[#70435b] underline underline-offset-2";
+      hintButton.textContent = "Need a hint?";
+      const hintText = document.createElement("p");
+      hintText.className = "rounded-xl bg-[#FDE8B2] p-3 text-left text-sm font-semibold text-[#3A2A29]";
+      hintText.textContent = question.hint;
+      hintText.hidden = true;
+      hintButton.addEventListener("click", () => {
+        hintText.hidden = !hintText.hidden;
+        hintButton.textContent = hintText.hidden ? "Need a hint?" : "Hide hint";
+      });
+      form.append(hintButton, hintText);
+    }
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      checkTextAnswer(answerInput.value);
+    });
+    optionsContainer.replaceChildren(form);
+    return;
+  }
+
   optionsContainer.replaceChildren(...question.options.map((option, index) => {
     const button = document.createElement("button");
     button.type = "button";
@@ -78,8 +117,65 @@ function renderQuestion() {
   }));
 }
 
+function normalizeAnswer(answer) {
+  return answer.toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim().replace(/\s+/g, " ");
+}
+
+async function checkTextAnswer(answer) {
+  const question = questions[currentQuestion];
+  const trimmedAnswer = answer.trim();
+  if (!trimmedAnswer) {
+    feedback.textContent = "Please type an answer before sending. 💕";
+    feedback.hidden = false;
+    return;
+  }
+  if (question.acceptAnyAnswer) {
+    const submit = optionsContainer.querySelector('button[type="submit"]');
+    submit.disabled = true;
+    submit.textContent = "Sending...";
+    feedback.hidden = true;
+    try {
+      const response = await fetch(answerDeliveryUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          subject: "Birthday Trivia Answer",
+          answer: trimmedAnswer,
+          question: question.question
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`Email service returned ${response.status}.`);
+      }
+      const result = await response.json();
+      if (result.success !== "true" && result.success !== true) {
+        throw new Error(result.message || "The email service did not accept the answer.");
+      }
+      checkAnswer();
+    } catch (error) {
+      submit.disabled = false;
+      submit.textContent = "Send answer";
+      feedback.textContent = "We couldn't send your answer. Please check your connection and try again.";
+      feedback.hidden = false;
+      console.error("Could not send trivia answer:", error);
+    }
+    return;
+  }
+
+  const acceptedAnswers = question.answers || [question.answer];
+  if (!acceptedAnswers.some((acceptedAnswer) => normalizeAnswer(trimmedAnswer) === normalizeAnswer(acceptedAnswer))) {
+    feedback.textContent = "Not quite! Try again to unlock the next question. 💕";
+    feedback.hidden = false;
+    return;
+  }
+  checkAnswer();
+}
+
 function checkAnswer(selectedIndex) {
-  if (selectedIndex !== questions[currentQuestion].correct) {
+  if (selectedIndex !== undefined && selectedIndex !== questions[currentQuestion].correct) {
     feedback.textContent = "Not quite! Try again to unlock the next question. 💕";
     feedback.hidden = false;
     return;

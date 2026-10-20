@@ -256,7 +256,7 @@ h2 {
   opacity: 0.72;
   transform: translateY(4px) scale(0.97);
   transform-origin: 655px 488px;
-  transition: all 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 650ms ease, transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slice-served #sidePlateBase {
@@ -268,7 +268,7 @@ h2 {
   opacity: 0;
   transform: translate(-236px, -68px) rotate(-19deg) scale(0.84);
   transform-origin: 650px 460px;
-  transition: transform 920ms cubic-bezier(0.22, 1.18, 0.36, 1), opacity 240ms ease;
+  transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1), opacity 450ms ease;
 }
 
 .slice-served #travelingSliceGroup {
