@@ -27,16 +27,46 @@ wishButton.addEventListener("click", () => {
   if (isOpening) wishInput.focus();
 });
 
-wishForm.addEventListener("submit", (event) => {
+wishForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (!wishInput.value.trim()) {
+  const wish = wishInput.value.trim();
+  if (!wish) {
     wishInput.focus();
     return;
   }
 
-  wishForm.hidden = true;
-  wishButton.setAttribute("aria-expanded", "false");
-  wishMessage.textContent = "Your wish is on its way to the stars. ✨";
+  const submitButton = wishForm.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending...";
+  wishMessage.textContent = "";
+  try {
+    const response = await fetch("https://formsubmit.co/ajax/zakinaik000@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        subject: "Birthday Wish",
+        wish
+      })
+    });
+    if (!response.ok) {
+      throw new Error(`Email service returned ${response.status}.`);
+    }
+    const result = await response.json();
+    if (result.success !== "true" && result.success !== true) {
+      throw new Error(result.message || "The email service did not accept the wish.");
+    }
+    wishForm.hidden = true;
+    wishButton.setAttribute("aria-expanded", "false");
+    wishMessage.textContent = "Your wish has been sent to zakinaik000@gmail.com. ✨";
+  } catch (error) {
+    submitButton.disabled = false;
+    submitButton.textContent = "Send my wish";
+    wishMessage.textContent = "We couldn't send your wish. Please check your connection and try again.";
+    console.error("Could not send birthday wish:", error);
+  }
 });
 
 function stopMicrophone() {

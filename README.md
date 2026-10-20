@@ -12,6 +12,8 @@ The birthday, memory-wall, and cake pages use separate stylesheets; the cake exp
 
 Question 5 in `trivia.js` accepts any non-empty typed answer and sends it to `zakinaik000@gmail.com` through FormSubmit's AJAX endpoint. The visitor is informed next to the answer field that FormSubmit will send the response to that address. Confirm the recipient address using the first verification email FormSubmit sends. The site must be online for this to work; FormSubmit handles the submission.
 
+The birthday wish form on `cake.html` also sends non-empty wishes to `zakinaik000@gmail.com` through FormSubmit and tells the visitor before submission. Confirm the recipient address with FormSubmit if it has not already been verified.
+
 ## Birthday song player
 
 The player stays in the top-right corner while moving between birthday pages. It starts as a small spinning vinyl button; tap it to open the compact controls and use the back arrow to collapse it without stopping the song. The expanded player includes mute and volume controls. The player attempts to start the first song when the page opens. Browsers may block audible autoplay until the visitor interacts with the page; if so, open the player and press play. Songs advance automatically when a track ends. The previous button restarts the current track, and pressing it again within three seconds goes to the previous track. Internal page links use in-page navigation so the same audio element keeps playing without restarting. Open the site through an HTTP/HTTPS server (for example, GitHub Pages or VS Code Live Server), not by opening the HTML files directly; browsers block the requests needed for in-page navigation from `file://`.
