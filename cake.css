@@ -362,6 +362,33 @@ h2 {
   cursor: pointer;
 }
 
+.gift-surprise-link {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  width: fit-content;
+  margin: 1.15rem auto 0;
+  color: #70435b;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.gift-surprise-link:hover {
+  transform: translateY(-3px);
+}
+
+.gift-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+  animation: giftBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes giftBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
 [hidden] {
   display: none !important;
 }

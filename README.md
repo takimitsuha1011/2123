@@ -6,7 +6,10 @@ Open `index.html` to start the birthday surprise. After the nickname prompt, the
 - `memory-wall.html` — a wall of 12 flip-to-read illustrated memories and a link to the trivia quest.
 - `trivia.html` — a five-question quiz; all answers must be correct to reveal the vault button.
 - `digital-vault.html` — the birthday letter, interactive digital vault letters, and a link to the cake.
-- `cake.html` — make a wish, light and blow out four candles, then tap the cake to serve a slice.
+- `cake.html` — make a wish, light and blow out four candles, then tap the cake to serve a slice and reveal the final gift.
+- `final-surprise.html` — a custom video player for the last birthday surprise.
+
+To add the final surprise video, place an MP4 named `final-surprise.mp4` in the `media` folder. The player on `final-surprise.html` loads `media/final-surprise.mp4`.
 
 The birthday, memory-wall, and cake pages use separate stylesheets; the cake experience has its own `cake.css` and `cake.js`.
 

@@ -377,6 +377,10 @@
       if (!parsedDocument.body || !parsedDocument.title) throw new Error("The requested page is incomplete.");
 
       window.dispatchEvent(new Event("birthday:pageleave"));
+      // Stop music when entering the final surprise page
+      if (target.pathname.includes("final-surprise")) {
+        audio.pause();
+      }
       document.body.className = parsedDocument.body.className;
       document.title = parsedDocument.title;
       updateStylesheets(parsedDocument, target);

@@ -9,6 +9,7 @@ const lightButton = document.getElementById("light-button");
 const blowButton = document.getElementById("blow-button");
 const manualBlowButton = document.getElementById("manual-blow-button");
 const candleStatus = document.getElementById("candle-status");
+const giftSurpriseLink = document.getElementById("gift-surprise-link");
 const flames = cake.querySelectorAll(".flame-group");
 
 let microphoneStream;
@@ -60,7 +61,7 @@ wishForm.addEventListener("submit", async (event) => {
     }
     wishForm.hidden = true;
     wishButton.setAttribute("aria-expanded", "false");
-    wishMessage.textContent = "Your wish has been sent to zakinaik000@gmail.com. ✨";
+    wishMessage.textContent = "Your wish has been sent to stars ✨";
   } catch (error) {
     submitButton.disabled = false;
     submitButton.textContent = "Send my wish";
@@ -204,6 +205,7 @@ function serveSlice() {
     document.getElementById("bottomTierClippedWrapper").setAttribute("clip-path", "url(#bottomTierCutoutClip)");
     cakeScene.classList.remove("cutting-active");
     cakeScene.classList.add("slice-served");
+    giftSurpriseLink.hidden = false;
   }, 420);
   cake.setAttribute("aria-label", "A slice has been taken from the birthday cake");
   candleStatus.textContent = "A slice, just for you! Happy Birthday! 🍰";

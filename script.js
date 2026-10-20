@@ -3,62 +3,73 @@ const memories = [
     caption: "First Date ☕",
     note: "I was so nervous before you walked in, and then we talked for hours until the cafe closed. Best coffee ever. ☕❤️",
     art: "☕",
-    image: "images/hheerr.jpg"
+    image: "images/1.jpg"
   },
   {
     caption: "Road Trip 🚗",
     note: "Singing at the top of our lungs with the windows down and pulling over to look at the stars. 🌠🚗",
-    art: "🚗"
+    art: "🚗",
+    image: "images/2.jpg"
   },
   {
     caption: "Stargazing ✨",
     note: "Wrapped up in one giant blanket under the night sky. None of those stars shine as bright as you. ✨🌙",
-    art: "🌙"
+    art: "🌙",
+    image: "images/199.jpg"
   },
   {
     caption: "Our Laugh Fest 😂",
     note: "I don't even remember what started the joke, just that we laughed until our stomachs hurt. 😂💕",
-    art: "😂"
+    art: "😂",
+    image: "images/4.jpg"
   },
   {
     caption: "Coffee Dates ☕",
     note: "Every little coffee date turns into my favorite part of the day when I'm with you. ☕💖",
-    art: "🥐"
+    art: "🥐",
+    image: "images/5.jpg"
   },
   {
     caption: "Singing Together 🎤",
     note: "Our car concerts may be off-key, but they will always be number one on my playlist. 🎶",
-    art: "🎤"
+    art: "🎤",
+    image: "images/6.jpg"
   },
   {
     caption: "Cozy Sundays 🧸",
     note: "Slow mornings, a cozy blanket, and nowhere else I'd rather be than right beside you. 🧸",
-    art: "🧸"
+    art: "🧸",
+    image: "images/7.jpg"
   },
   {
     caption: "A Perfect Picnic 🧺",
     note: "Good food, fresh air, and your smile made an ordinary afternoon feel magical. 🌷",
-    art: "🧺"
+    art: "🧺",
+    image: "images/8.jpg"
   },
   {
     caption: "Little Adventures 🗺️",
     note: "Even when we don't know where we're going, every adventure is better with you. 🗺️",
-    art: "🗺️"
+    art: "🗺️",
+    image: "images/9.jpg"
   },
   {
     caption: "Dancing Together 💃",
     note: "One song, a little dancing, and a memory I want to keep forever. 💃🕺",
-    art: "💃"
+    art: "💃",
+    image: "images/10.jpg"
   },
   {
     caption: "Our Sweet Treat 🍰",
     note: "Sharing dessert with you is sweet, but getting to share life with you is even sweeter. 🍰",
-    art: "🍰"
+    art: "🍰",
+    image: "images/11.jpg"
   },
   {
     caption: "My Favorite Person 💖",
     note: "Of all the moments we've shared, my favorite is simply getting to be with you. Happy Birthday! 💖",
-    art: "💖"
+    art: "💖",
+    image: "images/12.jpg"
   }
 ];
 
