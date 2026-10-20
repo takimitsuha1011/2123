@@ -23,7 +23,7 @@ const questions = [
     hint: "It was our first romantic moment together. 💋"
   },
   {
-    question: "who do love the most in this world? 💖",
+    question: "whom do I love the most in this world? 💖",
     options: [
       "Safiya 💕",
       "some random person! 😅",

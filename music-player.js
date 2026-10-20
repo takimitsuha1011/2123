@@ -381,6 +381,10 @@
       if (target.pathname.includes("final-surprise")) {
         audio.pause();
       }
+      // Resume music when leaving the final surprise page (going to any other page)
+      if (window.location.pathname.includes("final-surprise") && !target.pathname.includes("final-surprise")) {
+        audio.play().catch(() => {});
+      }
       document.body.className = parsedDocument.body.className;
       document.title = parsedDocument.title;
       updateStylesheets(parsedDocument, target);

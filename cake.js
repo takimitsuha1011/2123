@@ -103,7 +103,7 @@ function extinguishCandles(message) {
   flames.forEach((flame) => flame.setAttribute("aria-label", "Candle flame is out"));
   cake.setAttribute("aria-disabled", "false");
   cake.setAttribute("aria-label", "Birthday cake with candles blown out. Tap to take a slice.");
-  cakeInstruction.textContent = "The candles are out! Tap or press Enter on the cake to take a slice.";
+  cakeInstruction.textContent = "The candles are out! Tap on the cake to take a slice.";
   candleStatus.textContent = message;
   blowButton.hidden = true;
   manualBlowButton.hidden = true;

@@ -64,6 +64,9 @@ async function togglePlayback() {
 centerPlayButton.addEventListener("click", togglePlayback);
 playButton.addEventListener("click", togglePlayback);
 
+// Clicking the video itself toggles play/pause
+video.addEventListener("click", togglePlayback);
+
 video.addEventListener("play", updatePlayState);
 video.addEventListener("pause", updatePlayState);
 video.addEventListener("ended", updatePlayState);
