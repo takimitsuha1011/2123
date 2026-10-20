@@ -55,3 +55,7 @@ window.BIRTHDAY_MUSIC = {
 ```
 
 Lyrics appear beside the cover whenever the player is expanded. Three lines are shown at a time, with the current line highlighted and the lyrics scrolling automatically from the timestamps in seconds. Add the lyrics and timing yourself; automatic song transcription needs a speech-to-text service, which this static site does not use. There are no public upload controls. The config and any media files added to the repository are still visible to anyone who can access a publicly deployed site.
+
+
+
+a gift hor her
